@@ -15,7 +15,7 @@ use Alchemy\Phrasea\Controller\Admin\ConnectedUsersController;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class ConnectedUsersControllerTest extends \PHPUnit_Framework_TestCase
+class ConnectedUsersControllerTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider provideModuleNames
@@ -24,7 +24,7 @@ class ConnectedUsersControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testItProperlyTranslateModuleNames($id, $expected)
     {
-        $translator = $this->getMock(TranslatorInterface::class);
+        $translator = $this->createMock(TranslatorInterface::class);
         $translator
             ->expects($this->exactly(9))
             ->method('trans')
@@ -49,7 +49,7 @@ class ConnectedUsersControllerTest extends \PHPUnit_Framework_TestCase
             ->method('offsetGet')
             ->willReturnMap([
                 ['translator', $translator],
-                ['monolog', $this->getMock(LoggerInterface::class)],
+                ['monolog', $this->createMock(LoggerInterface::class)],
             ]);
 
         $controller = new ConnectedUsersController($app);

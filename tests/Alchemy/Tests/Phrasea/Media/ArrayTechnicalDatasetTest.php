@@ -15,7 +15,7 @@ use Alchemy\Phrasea\Media\TechnicalDataSet;
 use ArrayIterator;
 use Assert\AssertionFailedException;
 
-class ArrayTechnicalDataSetTest extends \PHPUnit_Framework_TestCase
+class ArrayTechnicalDataSetTest extends \PHPUnit\Framework\TestCase
 {
     /** @var ArrayTechnicalDataSet */
     private $sut;
@@ -54,7 +54,7 @@ class ArrayTechnicalDataSetTest extends \PHPUnit_Framework_TestCase
     {
         $data = $this->createTechnicalData('foo', 'bar');
 
-        $this->setExpectedException(AssertionFailedException::class);
+        $this->expectException(AssertionFailedException::class);
 
         $this->sut->offsetSet('bar', $data);
     }

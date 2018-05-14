@@ -13,7 +13,7 @@ namespace Alchemy\Tests\Phrasea\Hydration;
 use Alchemy\Phrasea\Hydration\Hydrator;
 use Alchemy\Phrasea\Hydration\ReflectionHydrator;
 
-class ReflectionHydratorTest extends \PHPUnit_Framework_TestCase
+class ReflectionHydratorTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var ReflectionHydrator
@@ -27,7 +27,7 @@ class ReflectionHydratorTest extends \PHPUnit_Framework_TestCase
 
     public function testItThrowsExceptionOnUnknownProperty()
     {
-        $this->setExpectedException(\ReflectionException::class);
+        $this->expectException(\ReflectionException::class);
 
         $sut = new ReflectionHydrator(ToHydrate::class, ['baz']);
         $sut->extract(new ToHydrate());

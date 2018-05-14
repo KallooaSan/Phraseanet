@@ -13,7 +13,7 @@
 
         {% set databox = records.databoxes|first %}
         {# This value is fetched when click on 2nd tab #}
-        <input type="hidden" name='original_selection' value="{{ app.request.query.get('lst') }}">
+        <input type="hidden" name='original_selection' value="{{ app.request_stack.currentRequest.query.get('lst') }}">
 
         <ul>
             <li><a href="#property-status">{{ 'Records Statut' | trans }}</a></li>
@@ -59,7 +59,7 @@
                     <tbody>
                         <tr style='border-bottom:1px solid #FFF;'>
                             <td colspan="6" style='font-size:11px;text-align:center'>
-                               {% trans %}Status edition{% endtrans %}</i>
+                               {% trans %}Status edition{% endtrans %}
                             </td>
                         </tr>
                         {% for bit,values in status %}

@@ -14,7 +14,7 @@ use Hoa\File;
  * @group unit
  * @group searchengine
  */
-class QueryCompilerTest extends \PHPUnit_Framework_TestCase
+class QueryCompilerTest extends \PHPUnit\Framework\TestCase
 {
     private $compiler;
 
@@ -25,7 +25,7 @@ class QueryCompilerTest extends \PHPUnit_Framework_TestCase
         $grammar_path = realpath(implode('/', [__DIR__, $project_root, $grammar_path]));
         $parser = Compiler\Llk\Llk::load(new File\Read($grammar_path));
 
-        $structure = $this->getMock(Structure::class);
+        $structure = $this->createMock(Structure::class);
 
         $queryVisitorFactory = function () use ($structure) {
             return new QueryVisitor($structure);

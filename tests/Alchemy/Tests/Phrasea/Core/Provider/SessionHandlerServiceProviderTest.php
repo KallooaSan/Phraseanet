@@ -14,7 +14,7 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-class SessionHandlerServiceProviderTest extends \PHPUnit_Framework_TestCase
+class SessionHandlerServiceProviderTest extends \PHPUnit\Framework\TestCase
 {
     /** @var SessionHandlerServiceProvider */
     private $sut;
@@ -38,6 +38,7 @@ class SessionHandlerServiceProviderTest extends \PHPUnit_Framework_TestCase
         $app['cache.connection-factory'] = $this->getMockBuilder('Alchemy\Phrasea\Cache\ConnectionFactory')
             ->disableOriginalConstructor()
             ->getMock();
+
         if ($method) {
             $app['cache.connection-factory']->expects($this->once())
                 ->method($method)
@@ -144,7 +145,7 @@ class SessionHandlerServiceProviderTest extends \PHPUnit_Framework_TestCase
 
     public function testItSavesSessionAtKernelResponseEvent()
     {
-        $session = $this->getMock(SessionInterface::class);
+        $session = $this->createMock(SessionInterface::class);
         $session
             ->expects($this->once())
             ->method('isStarted')
@@ -177,7 +178,7 @@ class SessionHandlerServiceProviderTest extends \PHPUnit_Framework_TestCase
 
     public function testItAddsFilterResponseAtBoot()
     {
-        $dispatcher = $this->getMock(EventDispatcherInterface::class);
+        $dispatcher = $this->createMock(EventDispatcherInterface::class);
         $dispatcher
             ->expects($this->once())
             ->method('addListener')

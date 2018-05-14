@@ -2,8 +2,8 @@
 
 namespace Alchemy\Tests\Phrasea\Controller\Api;
 
-use Alchemy\Phrasea\Core\PhraseaEvents;
 use Alchemy\Phrasea\Authentication\Context;
+use Alchemy\Phrasea\Core\PhraseaEvents;
 
 /**
  * @group functional
@@ -19,9 +19,10 @@ class OAuth2Test extends \PhraseanetAuthenticatedWebTestCase
     {
         parent::setUp();
 
-        self::$DI['app'] = self::$DI->share(function ($DI) {
+        self::$DI->offsetUnset('app');
+        self::$DI['app'] = function ($DI) {
             return $this->loadApp('/lib/Alchemy/Phrasea/Application/Api.php');
-        });
+        };
 
         $this->queryParameters = [
             "response_type" => "code",
@@ -104,7 +105,9 @@ class OAuth2Test extends \PhraseanetAuthenticatedWebTestCase
     {
         $this->setQueryParameters('grant_type', 'authorization_code');
         $this->setQueryParameters('code', '12345678918');
-        self::$DI['client']->request('POST', '/api/oauthv2/token', $this->queryParameters);
-        $this->assertEquals(400, self::$DI['client']->getResponse()->getStatusCode());
+
+        $client = self::getClient();
+        $client->request('POST', '/api/oauthv2/token', $this->queryParameters);
+        $this->assertEquals(400, $client->getResponse()->getStatusCode());
     }
 }
