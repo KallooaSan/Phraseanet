@@ -19,6 +19,7 @@ class patch_380alpha3bTest extends \PhraseanetTestCase
 
         $app = $this->getApplication();
 
+        $app->offsetUnset('conf');
         $app['conf'] = $this->getMockBuilder('Alchemy\Phrasea\Core\Configuration\PropertyAccess')
             ->disableOriginalConstructor()
             ->getMock();

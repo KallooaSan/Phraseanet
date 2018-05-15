@@ -42,14 +42,17 @@ class InstallerTest extends \PhraseanetTestCase
         @unlink($configFile);
         @unlink($compiledFile);
 
+        $app->offsetUnset('configuration.store');
         $app['configuration.store'] = function() use ($configFile, $compiledFile) {
             return new Configuration(new Yaml(), new Compiler(), $configFile, $compiledFile, true);
         };
 
+        $app->offsetUnset('conf');
         $app['conf'] = function() use($app) {
             return new PropertyAccess($app['configuration.store']);
         };
 
+        $app->offsetUnset('phraseanet.appbox');
         $app['phraseanet.appbox'] = function() use($app) {
             return new \appbox($app);
         };

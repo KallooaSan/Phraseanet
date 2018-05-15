@@ -36,6 +36,7 @@ class Migration38Test extends AbstractSetupTester
     public function testMigrate()
     {
         $app = new Application(Application::ENV_TEST);
+        $app->offsetUnset('configuration.store');
         $app['configuration.store'] = $this->createMock('Alchemy\Phrasea\Core\Configuration\ConfigurationInterface');
         $app['root.path'] = __DIR__ . '/../Probe/fixtures-3807';
 

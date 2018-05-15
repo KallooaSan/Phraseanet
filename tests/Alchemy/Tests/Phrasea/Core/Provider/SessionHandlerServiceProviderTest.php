@@ -187,6 +187,6 @@ class SessionHandlerServiceProviderTest extends \PHPUnit\Framework\TestCase
         $app = new Application();
         $app['dispatcher'] = $dispatcher;
 
-        $this->sut->boot($app);
+        $this->sut->subscribe($app, $app['dispatcher']);
     }
 }

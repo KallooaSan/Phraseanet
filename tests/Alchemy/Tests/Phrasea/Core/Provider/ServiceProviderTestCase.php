@@ -10,6 +10,7 @@ abstract class ServiceProviderTestCase extends \PhraseanetTestCase
      */
     public function theSameInstanceShouldBereturnedEveryTime($service, $key, $classname)
     {
+        self::$DI['app']->offsetUnset('firewall');
         self::$DI['app']->register(new $service());
 
         $instance1 = self::$DI['app'][$key];

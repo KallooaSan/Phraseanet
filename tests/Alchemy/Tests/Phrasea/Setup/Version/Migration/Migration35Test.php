@@ -49,6 +49,7 @@ class Migration35Test extends AbstractSetupTester
 
         $this->goBackTo35();
         $app = new Application(Application::ENV_TEST);
+        $app->offsetUnset('configuration.store');
         $migration = $this->getMigration($app);
         $migration->migrate();
 
