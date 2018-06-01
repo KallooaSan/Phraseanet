@@ -25,7 +25,7 @@ class PhraseaLocaleSubscriberTest extends \PhraseanetTestCase
         $client = new Client($app);
         $client->request('GET', '/', [], [], ['HTTP_accept-language' => '']);
 
-        $this->assertEquals('fr', $client->getResponse()->getContent());
+        $this->assertEquals('en', $client->getResponse()->getContent());
     }
 
     public function testWithCookie()
@@ -89,7 +89,7 @@ class PhraseaLocaleSubscriberTest extends \PhraseanetTestCase
         $client = $this->getClientWithCookie($app, null);
         $client->request('GET', '/', [], [], ['HTTP_accept-language' => '']);
 
-        $this->assertEquals('en_USA', $client->getResponse()->getContent());
+        $this->assertEquals('en', $client->getResponse()->getContent());
     }
 
     /**
@@ -103,14 +103,15 @@ class PhraseaLocaleSubscriberTest extends \PhraseanetTestCase
         $client = $this->getClientWithCookie($app, 'de_PL');
         $client->request('GET', '/', [], [], ['HTTP_accept-language' => '']);
 
-        $this->assertEquals('en_USA', $client->getResponse()->getContent());
+        $this->assertEquals('en', $client->getResponse()->getContent());
     }
 
     private function getAppThatReturnLocale()
     {
         $app = new SilexApp();
         $app['debug'] = true;
-        $app->register(new LocaleServiceProvider());
+        $app->offsetUnset('configuration.store');
+        $app->offsetUnset('conf');
         $app['configuration.store'] = $this->createMock('Alchemy\Phrasea\Core\Configuration\ConfigurationInterface');
         $app['configuration.store']->expects($this->any())
             ->method('isSetup')
@@ -118,7 +119,7 @@ class PhraseaLocaleSubscriberTest extends \PhraseanetTestCase
         $app['conf'] = $this->getMockBuilder('Alchemy\Phrasea\Core\Configuration\PropertyAccess')
             ->disableOriginalConstructor()
             ->getMock();
-
+        $app->register(new LocaleServiceProvider());
         $app['dispatcher']->addSubscriber(new PhraseaLocaleSubscriber($app));
 
         $app->get('/', function (SilexApp $app, Request $request) {

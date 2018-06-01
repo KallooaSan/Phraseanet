@@ -253,9 +253,15 @@ class TaskManagerController extends Controller
 
             return $this->app->json(['success' => true]);
         }
+        $errors = iterator_to_array($form->getErrors());
+        $errs = [];
+        foreach($errors as $error){
+            $errs[] = $error->getMessage();
+        }
+
         return $this->app->json([
             'success' => false,
-            'message' => implode("\n", iterator_to_array($form->getErrors())),
+            'message' => implode("\n", $errs),
         ]);
     }
 

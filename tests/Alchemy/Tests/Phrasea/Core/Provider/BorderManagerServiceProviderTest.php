@@ -29,6 +29,12 @@ class BorderManagerServiceProviderTest extends ServiceProviderTestCase
     public function testItLoadsWithoutXPDF()
     {
         $app = $this->loadApp();
+        $app->offsetUnset('border-manager.mime-guesser-configuration');
+        $app->offsetUnset('phraseanet.configuration.yaml-parser');
+        $app->offsetUnset('phraseanet.configuration.compiler');
+        $app->offsetUnset('configuration.store');
+        $app->offsetUnset('conf');
+        $app->offsetUnset('phraseanet.configuration');
         $app->register(new XPDFServiceProvider(), [
             'xpdf.configuration' => [
                 'pdftotext.binaries' => '/path/to/nowhere',
@@ -54,6 +60,12 @@ class BorderManagerServiceProviderTest extends ServiceProviderTestCase
         }
 
         $app = $this->loadApp();
+        $app->offsetUnset('border-manager.mime-guesser-configuration');
+        $app->offsetUnset('phraseanet.configuration.yaml-parser');
+        $app->offsetUnset('phraseanet.configuration.compiler');
+        $app->offsetUnset('configuration.store');
+        $app->offsetUnset('conf');
+        $app->offsetUnset('phraseanet.configuration');
         $app->register(new PhraseanetServiceProvider());
         $app->register(new XPDFServiceProvider(), [
             'xpdf.configuration' => [

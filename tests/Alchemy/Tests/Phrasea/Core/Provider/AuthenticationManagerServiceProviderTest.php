@@ -107,6 +107,11 @@ class AuthenticationManagerServiceProviderTest extends ServiceProviderTestCase
     public function testFailureAccountCreator()
     {
         $app = $this->getApplication();
+        $app->offsetUnset('phraseanet.configuration.yaml-parser');
+        $app->offsetUnset('phraseanet.configuration.compiler');
+        $app->offsetUnset('configuration.store');
+        $app->offsetUnset('conf');
+        $app->offsetUnset('phraseanet.configuration');
         $app->register(new ConfigurationServiceProvider());
         $app['conf']->set(['authentication', 'auto-create'], ['templates' => []]);
         $app['authentication.providers.account-creator'];
@@ -116,6 +121,11 @@ class AuthenticationManagerServiceProviderTest extends ServiceProviderTestCase
     {
         $app = $this->loadApp();
         $app['root.path'] = __DIR__ . '/../../../../../../';
+        $app->offsetUnset('phraseanet.configuration.yaml-parser');
+        $app->offsetUnset('phraseanet.configuration.compiler');
+        $app->offsetUnset('configuration.store');
+        $app->offsetUnset('conf');
+        $app->offsetUnset('phraseanet.configuration');
         $app->register(new AuthenticationManagerServiceProvider());
         $app->register(new ConfigurationServiceProvider());
         $app->register(new RepositoriesServiceProvider());
@@ -138,6 +148,11 @@ class AuthenticationManagerServiceProviderTest extends ServiceProviderTestCase
     {
         $app = $this->loadApp();
         $app['root.path'] = __DIR__ . '/../../../../../../';
+        $app->offsetUnset('phraseanet.configuration.yaml-parser');
+        $app->offsetUnset('phraseanet.configuration.compiler');
+        $app->offsetUnset('configuration.store');
+        $app->offsetUnset('conf');
+        $app->offsetUnset('phraseanet.configuration');
         $app->register(new AuthenticationManagerServiceProvider());
         $app->register(new ConfigurationServiceProvider());
         $app['phraseanet.appbox'] = self::$DI['app']['phraseanet.appbox'];

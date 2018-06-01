@@ -25,7 +25,7 @@ class ConnectionFactoryTest extends \PhraseanetTestCase
     }
 
     /**
-     * @expectedException \Alchemy\PHrasea\Exception\RuntimeException
+     * @expectedException \Alchemy\Phrasea\Exception\RuntimeException
      * @expectedExceptionMessage Redis instance with host 'unknown-host' and port '666' is not reachable
      */
     public function testGetInvalidRedisConnection()
@@ -55,7 +55,7 @@ class ConnectionFactoryTest extends \PhraseanetTestCase
     }
 
     /**
-     * @expectedException \Alchemy\PHrasea\Exception\RuntimeException
+     * @expectedException \Alchemy\Phrasea\Exception\RuntimeException
      * @expectedExceptionMessage Memcached instance with host 'unknown-host' and port '666' is not reachable
      */
     public function testGetInvalidMemcachedConnection()
@@ -85,7 +85,7 @@ class ConnectionFactoryTest extends \PhraseanetTestCase
     }
 
     /**
-     * @expectedException \Alchemy\PHrasea\Exception\RuntimeException
+     * @expectedException \Alchemy\Phrasea\Exception\RuntimeException
      * @expectedExceptionMessage Memcache instance with host 'unknown-host' and port '666' is not reachable
      */
     public function testGetInvalidMemcacheConnection()

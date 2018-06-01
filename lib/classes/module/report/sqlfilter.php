@@ -133,8 +133,8 @@ class module_report_sqlfilter
     {
         $this->filter['user'] = false;
         $f = $report->getTabFilter();
-
-        if (sizeof($f) > 0) {
+        $fSize = $report->getTabFilter() != null ? sizeof($report->getTabFilter()) : 0;
+        if ($fSize > 0) {
             $filter = [];
             $params = [];
             $n = 0;
@@ -188,7 +188,8 @@ class module_report_sqlfilter
     private function orderFilter(module_report $report)
     {
         $this->filter['order'] = false;
-        if (sizeof($report->getOrder()) > 0) {
+        $reportSize = $report->getOrder() != null ? sizeof($report->getOrder()) : 0;
+        if ($reportSize > 0) {
             $this->filter['order'] = " ORDER BY "
                 . $this->cor_query[$report->getOrder('champ')]
                 . ' ' . $report->getOrder('order');

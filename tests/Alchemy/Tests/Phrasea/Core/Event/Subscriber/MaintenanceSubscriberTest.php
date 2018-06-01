@@ -50,7 +50,7 @@ class MaintenanceSubscriberTest extends \PhraseanetTestCase
         if (is_file($app['phraseanet.configuration.config-compiled-path'])) {
             unlink($app['phraseanet.configuration.config-compiled-path']);
         }
-
+        $app->offsetUnset('configuration.store');
         $app['configuration.store'] = new HostConfiguration(new Configuration(
             $app['phraseanet.configuration.yaml-parser'],
             $app['phraseanet.configuration.compiler'],
@@ -59,6 +59,7 @@ class MaintenanceSubscriberTest extends \PhraseanetTestCase
             $app['debug']
         ));
 
+        $app->offsetUnset('conf');
         $app['conf'] = new PropertyAccess($app['configuration.store']);
 
         unset($app['exception_handler']);

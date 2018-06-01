@@ -5,6 +5,7 @@ namespace Alchemy\Tests\Phrasea\Core\Provider;
 use Alchemy\Phrasea\Core\Event\Subscriber\TrustedProxySubscriber;
 use Alchemy\Phrasea\Core\Provider\ConfigurationServiceProvider;
 use Silex\Application;
+use Alchemy\Phrasea\Application as PhraseaApplication;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -49,8 +50,13 @@ class ConfigurationServiceProviderTest extends ServiceProviderTestCase
 
     public function testItAddsRequestTrustedProxiesSubscriberOnBoot()
     {
-        $app = new Application();
+        $app = new PhraseaApplication();
         $app['root.path'] = __DIR__ . '/../../../../../..';
+        $app->offsetUnset('phraseanet.configuration.yaml-parser');
+        $app->offsetUnset('phraseanet.configuration.compiler');
+        $app->offsetUnset('configuration.store');
+        $app->offsetUnset('conf');
+        $app->offsetUnset('phraseanet.configuration');
         $app->register(new ConfigurationServiceProvider());
         $app['phraseanet.configuration.config-path'] = __DIR__ . '/fixtures/config-proxies.yml';
         $app['phraseanet.configuration.config-compiled-path'] = __DIR__ . '/fixtures/config-proxies.php';

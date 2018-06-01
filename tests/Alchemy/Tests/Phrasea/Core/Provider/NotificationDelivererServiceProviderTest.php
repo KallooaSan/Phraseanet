@@ -25,6 +25,7 @@ class NotificationDelivererServiceProviderTest extends ServiceProviderTestCase
     {
         self::$DI['app']->register(new NotificationDelivererServiceProvider());
 
+        self::$DI['app']->offsetUnset('conf');
         self::$DI['app']['conf'] = $this->getMockBuilder('Alchemy\Phrasea\Core\Configuration\PropertyAccess')
             ->disableOriginalConstructor()
             ->getMock();

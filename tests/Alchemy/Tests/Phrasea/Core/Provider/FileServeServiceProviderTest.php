@@ -42,6 +42,11 @@ class FileServeServiceProviderTest extends ServiceProviderTestCase
     {
         $app = clone $this->getApplication();
         $app['root.path'] = __DIR__ . '/../../../../../..';
+        $app->offsetUnset('phraseanet.configuration');
+        $app->offsetUnset('phraseanet.configuration.yaml-parser');
+        $app->offsetUnset('phraseanet.configuration.compiler');
+        $app->offsetUnset('configuration.store');
+        $app->offsetUnset('conf');
         $app->register(new ConfigurationServiceProvider());
         $app->register(new FileServeServiceProvider());
         $app['phraseanet.configuration.config-path'] = __DIR__ . '/fixtures/config-mapping.yml';

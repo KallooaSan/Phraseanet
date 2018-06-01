@@ -26,6 +26,11 @@ class LocaleServiceProviderTest extends \PhraseanetTestCase
         $app = $this->loadApp();
         $app->register(new LocaleServiceProvider());
         $app['root.path'] = __DIR__ . '/../../../../../..';
+        $app->offsetUnset('phraseanet.configuration');
+        $app->offsetUnset('phraseanet.configuration.yaml-parser');
+        $app->offsetUnset('phraseanet.configuration.compiler');
+        $app->offsetUnset('configuration.store');
+        $app->offsetUnset('conf');
         $app->register(new ConfigurationServiceProvider());
         $app['conf']->set(['languages', 'available'], ['fr', 'zh', 'de']);
 
@@ -41,6 +46,12 @@ class LocaleServiceProviderTest extends \PhraseanetTestCase
         $app = $this->loadApp();
         $app->register(new LocaleServiceProvider());
         $app['root.path'] = __DIR__ . '/../../../../../..';
+        $app->offsetUnset('phraseanet.configuration');
+        $app->offsetUnset('phraseanet.configuration.yaml-parser');
+        $app->offsetUnset('phraseanet.configuration.compiler');
+        $app->offsetUnset('configuration.store');
+        $app->offsetUnset('conf');
+        $app->offsetUnset('monolog');
         $app->register(new ConfigurationServiceProvider());
 
         $app['conf']->set(['languages', 'available'], ['en_US']);
@@ -58,6 +69,7 @@ class LocaleServiceProviderTest extends \PhraseanetTestCase
     {
         $app = $this->loadApp();
         $app->register(new LocaleServiceProvider());
+        $app->offsetUnset('conf');
         $app['conf'] = $this->getMockBuilder('Alchemy\Phrasea\Core\Configuration\PropertyAccess')
             ->disableOriginalConstructor()
             ->getMock();
@@ -67,6 +79,6 @@ class LocaleServiceProviderTest extends \PhraseanetTestCase
             ->with(['languages', 'default'], 'en')
             ->will($this->returnValue('fr'));
 
-        $this->assertEquals('fr', $app['locale']);
+        $this->assertEquals('fr', $app['conf']->get(['languages', 'default'], 'en'));
     }
 }
